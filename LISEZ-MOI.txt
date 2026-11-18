@@ -1,0 +1,20 @@
+MISE À JOUR — CHOIX CLIENT DES PLATS ET OFFRES DE VOYAGE
+
+Cette mise à jour ajoute à l’annuaire public des cases « Choisir » pour les plats de restaurant et les offres d’agence déjà publiés. Le client peut choisir une ou plusieurs prestations. Le choix est récapitulé avant l’envoi et ajouté au message de la demande de réservation que l’administrateur consulte.
+
+Aucune modification PHP ou SQL n’est nécessaire pour ce correctif. Ne réimportez pas le fichier SQL.
+
+INSTALLATION
+1. Laissez Apache, MySQL et le serveur Vite démarrés.
+2. Faites une copie de sauvegarde de frontend/src/App.jsx et frontend/src/App.css.
+3. Extrayez selection-plats-voyages-client.zip dans C:\xampp\htdocs\annuaire-tourisme et acceptez le remplacement des deux fichiers.
+4. Si Vite ne recharge pas la page, arrêtez-le avec Ctrl+C dans le terminal où il tourne, puis relancez-le depuis le dossier frontend avec : npm run dev
+5. Actualisez http://localhost:5173/ avec Ctrl+F5.
+
+ESSAI
+1. Dans l’administration, assurez-vous qu’un restaurant ou une agence a au moins un plat ou une offre enregistré avec le statut « publié ».
+2. Sur la fiche publique de ce prestataire, cochez « Choisir » à côté d’un ou plusieurs plats ou circuits.
+3. Cliquez sur « Demander une réservation » : la sélection doit apparaître dans le récapitulatif.
+4. Remplissez le formulaire et envoyez une demande de test. Dans l’administration, vérifiez la colonne Message de cette réservation : elle doit contenir « Prestations choisies par le client » et les intitulés retenus.
+
+Les choix ne déclenchent aucun paiement et ne confirment pas automatiquement la réservation. Ils sont transmis comme demande à traiter par l’administrateur. Seules les prestations publiées sont affichées au public.

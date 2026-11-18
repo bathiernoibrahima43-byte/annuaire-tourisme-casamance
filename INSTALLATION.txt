@@ -1,0 +1,54 @@
+EXTENSION — CATÉGORIES DÉTAILLÉES, PLATS, OFFRES ET LOCALISATION
+
+Cette mise à jour ajoute :
+- pour les restaurants : type de cuisine, nom du chef, plats/spécialités, catégorie et tarif indicatif ;
+- pour les agences de voyage : excursions, circuits, visites, transferts ou séjours, avec destination, lieu exact de départ, durée et tarif ;
+- pour les fiches : commune/village/quartier, repère, et coordonnées GPS facultatives ;
+- la recherche publique dans les spécialités, plats, offres et destinations ;
+- la gestion d’ajout, de modification et d’archivage des prestations dans l’administration.
+
+AVANT DE COMMENCER
+1. Démarrez Apache et MySQL dans XAMPP.
+2. Faites une copie de sauvegarde du dossier du projet et de la base annuaire_tourisme. Cette extension est additive, mais une sauvegarde reste recommandée.
+3. N’inscrivez pas d’exemples comme s’il s’agissait de services confirmés. Les plats, prix, destinations et lieux doivent être vérifiés auprès des prestataires concernés.
+
+ÉTAPE 1 — CRÉER LES NOUVELLES TABLES
+1. Ouvrez http://localhost/phpmyadmin
+2. Sélectionnez la base annuaire_tourisme.
+3. Ouvrez l’onglet « Importer » et choisissez le fichier :
+   database/20261118_categories_detaillees.sql
+4. Lancez l’importation et vérifiez que phpMyAdmin confirme la création des tables prestataire_details et prestataire_services.
+
+La migration crée uniquement deux tables nouvelles ; elle ne supprime ni ne modifie les tables existantes. Elle ne contient aucune donnée d’exemple.
+
+ÉTAPE 2 — COPIER LES FICHIERS
+1. Extrayez l’archive à la racine :
+   C:\xampp\htdocs\annuaire-tourisme
+2. Acceptez le remplacement des fichiers demandés.
+3. Vérifiez que le fichier api/db.php déjà présent sur votre ordinateur n’a pas été supprimé. Il n’est pas inclus dans cette archive.
+
+Fichiers concernés :
+- api/admin_prestataires.php
+- api/prestataires.php
+- api/admin_services.php (nouveau)
+- api/prestataire_details.php (nouveau)
+- api/services.php (nouveau)
+- frontend/src/Admin.jsx
+- frontend/src/App.jsx
+- frontend/src/App.css
+- database/20261118_categories_detaillees.sql
+
+ÉTAPE 3 — ESSAI LOCAL
+1. Gardez Apache et MySQL démarrés et le serveur Vite en cours d’exécution.
+2. Ouvrez http://localhost:5173/admin et connectez-vous.
+3. Dans « Prestataires », modifiez une fiche Restaurant : indiquez le type de cuisine et le chef seulement si ces informations sont confirmées ; renseignez le village/quartier et le repère.
+4. Dans « Plats et offres détaillés », choisissez cette fiche et ajoutez un plat avec sa sous-catégorie et son tarif confirmé.
+5. Répétez avec une fiche Agence de voyage en précisant une destination et un lieu exact de départ.
+6. Actualisez http://localhost:5173/ avec Ctrl+F5. Recherchez le plat, la destination ou le lieu et vérifiez leur affichage sur la fiche publique.
+7. N’ajoutez les coordonnées GPS que si elles ont été vérifiées ; les deux coordonnées doivent être fournies ensemble.
+
+CONSERVATION DES FONCTIONS
+Les réservations, avis, disponibilités, historique, catégories générales et actions déjà présentes restent en place. Les prestations sont archivées plutôt que supprimées définitivement. L’accès à leur gestion reste réservé à un administrateur connecté.
+
+CONTRÔLES EFFECTUÉS DANS LA COPIE DE TRAVAIL
+Le frontend passe ESLint et la compilation de production Vite. L’intégration avec la base MySQL réelle doit encore être vérifiée sur votre XAMPP après import de la migration, car l’archive source ne contient ni db.php ni export de la base.
